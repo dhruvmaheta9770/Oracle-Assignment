@@ -1,0 +1,94 @@
+/* CREATE TABLE */
+
+CREATE TABLE student_duty
+(
+    s_id NUMBER(3) PRIMARY KEY,
+    s_num VARCHAR2(50),
+    per NUMBER(5,2),
+    class VARCHAR2(20),
+    dob DATE,
+    city VARCHAR2(30)
+);
+
+/* INSERT RECORDS */
+
+INSERT INTO student_duty VALUES
+(1,'Dhruv',85.5,'A',DATE '2004-05-25','Surat');
+
+INSERT INTO student_duty VALUES
+(2,'Vivek',82.5,'B',DATE '2003-08-22','Ahmedabad');
+
+INSERT INTO student_duty VALUES
+(3,'Gopal',78.2,'A',DATE '2003-09-13','Rajkot');
+
+INSERT INTO student_duty VALUES
+(4,'Ajay',75.3,'B',DATE '2004-10-24','Amreli');
+
+INSERT INTO student_duty VALUES
+(5,'Jeet',68.2,'A',DATE '2004-07-23','Surat');
+
+INSERT INTO student_duty VALUES
+(6,'Dhruval',49,'B',DATE '2003-07-07','Surat');
+
+INSERT INTO student_duty VALUES
+(7,'Kishan',48.3,'B',DATE '2004-08-11','Amreli');
+
+INSERT INTO student_duty VALUES
+(8,'Kish',45,'A',DATE '2005-12-01','Bhavnagar');
+
+INSERT INTO student_duty VALUES
+(9,'Jay',86,'B',DATE '2003-11-07','Amreli');
+
+INSERT INTO student_duty VALUES
+(10,'Vijay',77,'A',DATE '2004-01-08','Ahmedabad');
+
+/* ASSIGNMENT QUERIES */
+
+-- Display all records
+SELECT * FROM student_duty;
+
+-- Change the student class whose city is 'Surat'
+UPDATE student_duty
+SET class='C'
+WHERE city='Surat';
+
+-- Delete student records where percentage is less than 50
+DELETE FROM student_duty
+WHERE per<50;
+
+-- Display unique classes
+SELECT DISTINCT class
+FROM student_duty;
+
+-- Arrange table according to percentage
+SELECT *
+FROM student_duty
+ORDER BY per;
+
+-- Display the name of students starting with 'D'
+SELECT *
+FROM student_duty
+WHERE s_num LIKE 'D%';
+
+-- Display average percentage according to class
+SELECT class, AVG(per) AS average_percentage
+FROM student_duty
+GROUP BY class;
+
+-- Display records of students whose birth year is between 2004 and 2005
+SELECT *
+FROM student_duty
+WHERE EXTRACT(YEAR FROM dob) BETWEEN 2004 AND 2005;
+
+-- Display records of students belonging to Amreli and Class B
+SELECT *
+FROM student_duty
+WHERE city='Amreli'
+AND class='B';
+
+-- Add mobile number column
+ALTER TABLE student_duty
+ADD mobile_no NUMBER(10);
+
+-- Display table definition
+DESC student_duty;
